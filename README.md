@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sample App: Using web sockets on Next.js
 
-## Getting Started
+This is a very simple chat application that demonstrates how to web sockets with Next.js. See the video for a walk through of this code: https://youtu.be/9DEvkYB5_A4
 
-First, run the development server:
+## Running locally
+
+First install all dependencies:
+
+```bash
+npm install
+```
+
+Then start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploying to Fly.io
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To deploy this application to Fly.io, simply run:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+fly launch
+```
 
-## Learn More
+When it asks:
+```
+An existing fly.toml file was found for app ws-demo-next
+? Would you like to copy its configuration to the new app?
+```
 
-To learn more about Next.js, take a look at the following resources:
+Choose **Yes**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+When it asks:
+```
+? Do you want to tweak these settings before proceeding?
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Choose **No** (unless you want to change the app name or region, etc)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Once finished, you'll be able to access your app at `https://<YOUR-APP>.fly.dev`
