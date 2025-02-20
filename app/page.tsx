@@ -8,15 +8,11 @@ export default function Home() {
   const wsRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
+    
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
     const ws = new WebSocket(`${protocol}//${window.location.host}/api/ws`);
     wsRef.current = ws;
 
-    const pingInterval = setInterval(() => {
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.send(`{"event":"ping"}`);
-      }
-    }, 29000);
 
     ws.onopen = () => {
       setConnectionStatus('connected');
@@ -29,6 +25,12 @@ export default function Home() {
     ws.onmessage = (event) => {
       setMessages((prevMessages) => [...prevMessages, event.data]);
     };
+
+    const pingInterval = setInterval(() => {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(`{"event":"ping"}`);
+      }
+    }, 29000);
 
     return () => {
       clearInterval(pingInterval);
