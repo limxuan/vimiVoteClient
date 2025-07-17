@@ -28,8 +28,12 @@ export default function Home() {
     };
 
     ws.onmessage = (event) => {
-      console.log("message");
-      setMessages((prevMessages) => [...prevMessages, event.data]);
+      if (event.data == "") return;
+      const vote: Vote = JSON.parse(event.data);
+      handleNewVote({
+        phoneNumber: vote.phoneNumber,
+        tableNumber: vote.tableNumber,
+      });
     };
 
     const pingInterval = setInterval(() => {

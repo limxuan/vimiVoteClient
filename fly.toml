@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for ws-demo-next on 2025-02-19T15:21:49-08:00
+# fly.toml app configuration file generated for nextjs-websockets-patient-silence-2746 on 2025-07-17T18:17:58+08:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'ws-demo-next'
-primary_region = 'sea'
+app = 'nextjs-websockets-patient-silence-2746'
+primary_region = 'hkg'
 
 [build]
 
