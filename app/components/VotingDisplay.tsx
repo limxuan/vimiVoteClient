@@ -27,15 +27,21 @@ interface VotingDisplayProps {
 export const VotingDisplay = ({ votes, onNewVote }: VotingDisplayProps) => {
     const [animatingVotes, setAnimatingVotes] = useState<string[]>([]);
     const [showSettings, setShowSettings] = useState(false);
-    const [config, setConfig] = useState<VotingConfig>(() => {
-        const saved = localStorage.getItem("votingConfig");
-        return saved
-            ? JSON.parse(saved)
-            : {
-                presentationTitle: "Presentation Title",
-                availableTables: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            };
+    const [config, setConfig] = useState<VotingConfig>({
+        presentationTitle: "Presentation Title",
+        availableTables: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     });
+
+    useEffect(() => {
+        const saved = localStorage.getItem("votingConfig");
+        if (saved) {
+            try {
+                setConfig(JSON.parse(saved));
+            } catch (e) {
+                console.warn("Invalid config in localStorage");
+            }
+        }
+    }, []);
 
     const saveConfig = (newConfig: VotingConfig) => {
         setConfig(newConfig);
