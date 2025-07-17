@@ -19,6 +19,7 @@ nextApp.prepare().then(() => {
       const parsedUrl = parse(req.url || "", true);
 
       if (req.method === "POST" && parsedUrl.pathname === "/api/broadcast") {
+        console.log("received post request");
         let body = "";
 
         req.on("data", (chunk) => {
@@ -28,11 +29,13 @@ nextApp.prepare().then(() => {
         req.on("end", () => {
           try {
             const message = JSON.parse(body);
+            console.log(message);
 
             // Broadcast to all connected clients
             clients.forEach((client) => {
               if (client.readyState === WebSocket.OPEN) {
                 client.send(JSON.stringify(message));
+                console.log("sent message", JSON.stringify(message));
               }
             });
 
@@ -60,6 +63,7 @@ nextApp.prepare().then(() => {
     ws.on("message", (message: Buffer, isBinary: boolean) => {
       console.log(`Message received: ${message}`);
       clients.forEach((client) => {
+        console.log({ readyState: client.readyState });
         if (
           client.readyState === WebSocket.OPEN &&
           message.toString() !== `{"event":"ping"}`
